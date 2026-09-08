@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff4a0"/><stop offset=".32" stop-color="#ffd12f"/><stop offset=".72" stop-color="#f1a914"/><stop offset="1" stop-color="#b96b08"/></linearGradient>
+ <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1e5cb5"/><stop offset=".4" stop-color="#092d77"/><stop offset="1" stop-color="#03143f"/></linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="9" flood-color="#00133d" flood-opacity=".5"/></filter>
+</defs>
+<circle cx="400" cy="400" r="382" fill="#06143b" stroke="#e9a928" stroke-width="16" filter="url(#shadow)"/>
+<circle cx="400" cy="400" r="344" fill="url(#navy)" stroke="#ffe17a" stroke-width="8"/>
+<circle cx="400" cy="400" r="284" fill="url(#gold)" stroke="#a86b08" stroke-width="6"/>
+<path d="M400 116v568M116 400h568" stroke="#b9790b" stroke-width="10"/>
+<g fill="#fff" font-family="Georgia,serif" font-weight="700" text-anchor="middle"><text x="400" y="58" font-size="35" letter-spacing="1">DHANALAKSHMI SRINIVASAN</text><text x="400" y="112" font-size="30" letter-spacing="2">ENGINEERING COLLEGE</text><text x="400" y="756" font-size="38" letter-spacing="7">PERAMBALUR</text></g>
+<g transform="translate(190 180)"><path d="M34 118c-12-42 12-70 39-99 8 27 39 33 20 76-12 26-36 39-59 23Z" fill="#f04b2f" stroke="#a51d18" stroke-width="7"/><path d="M47 112c-2-30 14-45 35-64 2 25 16 37-1 56-9 10-21 14-34 8Z" fill="#ffe037"/><path d="M35 130h75" stroke="#a66a09" stroke-width="12"/><path d="M70 130 32 194" stroke="#87550a" stroke-width="17"/></g>
+<g transform="translate(492 177)" fill="#f8f8ed" stroke="#c82728" stroke-width="8"><path d="M38 10 66 80 115 14l18 20-42 61 59 40-16 25-61-35-59 42-18-25 58-44-41-58Z"/></g>
+<g transform="translate(150 435)" fill="#dd299a" stroke="#762067" stroke-width="4"><path d="M101 82C37 75 18 33 16 4c42 1 73 23 89 60C104 29 128 4 164 0c3 40-20 75-54 92 42-33 76-34 110-17-21 43-69 58-119 36Z"/><path d="M101 83v67" fill="none" stroke="#457634" stroke-width="9"/><path d="M38 143c41-23 77-24 113 0" fill="none" stroke="#457634" stroke-width="9"/><ellipse cx="28" cy="151" rx="25" ry="10" fill="#4b982e"/><ellipse cx="172" cy="151" rx="25" ry="10" fill="#4b982e"/></g>
+<g transform="translate(487 445)"><path d="M7 27 91 7l54 24v117l-57 17-81-21Z" fill="#fffdf1" stroke="#0754a8" stroke-width="9"/><path d="M91 7v121l54-27" fill="#dae4da" stroke="#0754a8" stroke-width="9"/><g stroke="#1783c7" stroke-width="5"><path d="M28 48h47M28 65h47M28 82h47M28 99h47M106 43h26M106 60h26M106 77h26M106 94h26"/></g></g>
+<g fill="#fff" font-family="Arial,sans-serif" font-size="42" font-weight="700"><text x="165" y="390">★</text><text x="590" y="390">★</text></g>
+</svg>
