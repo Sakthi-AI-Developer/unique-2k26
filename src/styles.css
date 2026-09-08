@@ -75,6 +75,235 @@ h1 span { display: block; padding: 11px 0 0 14%; color: transparent; -webkit-tex
 .modal-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 25px; margin-bottom: 24px; }.modal-sections h3 { margin: 0 0 7px; }.modal-sections p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }.event-modal { width: min(680px, 100%); max-height: min(760px, calc(100vh - 40px)); overflow-y: auto; }.event-modal ul { margin-bottom: 0; }
 @media (max-width: 580px) { .participation-rule { grid-template-columns: 1fr; gap: 7px; }.participation-rule small { grid-column: auto; }.modal-sections { grid-template-columns: 1fr; gap: 15px; }.footer-links { width: 100%; order: 4; flex-wrap: wrap; margin-left: 0; } }
 
+@media (max-width: 768px) {
+	html, body { max-width: 100%; overflow-x: hidden; }
+	.container { width: min(100% - 28px, 680px); }
+	.nav-wrap { padding: 9px 0; }
+	.nav { height: 48px; padding: 0 9px 0 12px; border-radius: 15px; }
+	.brand { gap: 7px; font-size: 10px; letter-spacing: .1em; }
+	.brand-mark { width: 24px; height: 24px; border-radius: 7px; font-size: 12px; }
+	.menu-toggle { width: 34px; height: 34px; display: grid; place-items: center; }
+	.menu-toggle svg { width: 19px; height: 19px; }
+	.nav-links { inset: 64px 14px auto; max-height: calc(100vh - 80px); overflow-y: auto; gap: 2px; padding: 12px 15px; border-radius: 15px; }
+	.nav-links button { padding: 8px 0; font-size: 9px; }
+	.nav-register { padding: 10px 12px; margin-top: 5px; border-radius: 10px; }
+	.hero { min-height: 0; padding-top: 73px; padding-bottom: 12px; }
+	.hero-copy { padding: 10px 0 0; }
+	.eyebrow { margin-bottom: 12px; font-size: 8px; }
+	.hero h1 { font-size: clamp(3.1rem, 15.5vw, 5rem); }
+	.hero h1 span { padding-top: 6px; }
+	.hero-category { margin-top: 10px; font-size: 8px; }
+	.hero-statement { margin: 14px 0 9px; font-size: clamp(1rem, 5vw, 1.45rem); }
+	.hero-tagline { margin: 13px 0 4px; font-size: 13px; }
+	.hero-intro { max-width: 32rem; margin-bottom: 10px; font-size: 10px; line-height: 1.45; }
+	.hero-details { max-width: none; gap: 6px 14px; margin: 10px 0 12px; padding: 9px 0; }
+	.hero-details span { font-size: 7px; }
+	.hero-details strong { font-size: 15px; }
+	.hero-details strong small { font-size: 7px; }
+	.hero-details p { margin-top: 1px; font-size: 6px; }
+	.hero-actions { gap: 7px; }
+	.hero-actions .button { min-height: 38px; padding: 10px 7px; font-size: 7px; }
+	.hero-actions svg { width: 14px; height: 14px; }
+	.hero-meta { gap: 4px; margin-top: 12px; font-size: 8px; }
+	.hero-visual { height: clamp(235px, 68vw, 300px); margin-top: 0; }
+	.hero-visual .visual-caption { bottom: 4px; font-size: 6px; }
+	.countdown { margin-top: 4px; padding: 9px 11px; border-radius: 12px; }
+	.countdown-label { font-size: 7px; }
+	.countdown-units { margin-top: 5px; }
+	.countdown strong { font-size: 15px; }
+	.countdown small { font-size: 6px; }
+	.section, .sponsors { padding-top: 58px; }
+	.section-heading { margin-bottom: 23px; }
+	.section-heading h2, .about-grid h2, .register-inner h2, .contact-grid h2 { margin-top: 9px; font-size: clamp(2.2rem, 11vw, 3.8rem); }
+	.section-heading > p { margin-top: 12px; font-size: 11px; line-height: 1.5; }
+	.participation-rule { margin-bottom: 13px; padding: 13px 14px; border-radius: 12px; }
+	.participation-rule strong { font-size: 11px; }
+	.participation-rule span, .participation-rule small { font-size: 8px; line-height: 1.4; }
+	.filter-row { margin-bottom: 12px; }
+	.filter-row button { padding: 7px 9px; font-size: 7px; }
+	.event-card { grid-template-columns: minmax(0, 1fr) minmax(92px, 34%); gap: 3px 8px; padding: 13px 0; }
+	.card-top > span:first-child { font-size: 7px; }
+	.event-card h3 { font-size: clamp(.98rem, 4.8vw, 1.3rem); }
+	.card-bottom { gap: 4px; font-size: 7px; }
+	.schedule-section, .about-section { margin-top: 58px; padding-bottom: 58px; }
+	.schedule-coming { padding: 18px 14px; border-radius: 16px; }
+	.schedule-status { padding: 6px 8px; font-size: 7px; }
+	.schedule-facts { margin-top: 16px; }
+	.schedule-facts div { gap: 6px; padding: 11px; }
+	.schedule-facts span { font-size: 7px; }
+	.schedule-facts strong { font-size: 10px; }
+	.schedule-roadmap { margin-top: 16px; padding: 6px 0; }
+	.schedule-roadmap div { padding: 7px 0; font-size: 8px; }
+	.schedule-roadmap b { font-size: 14px; }
+	.schedule-note { margin-top: 11px; font-size: 7px; line-height: 1.45; }
+	.coordinator-section { padding-bottom: 0; }
+	.coordinator-grid { gap: 10px; }
+	.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 285px; }
+	.coordinator-hod { min-height: 340px; }
+	.coordinator-overlay { right: 15px; bottom: 16px; left: 15px; }
+	.coordinator-role { top: 12px; left: 12px; padding: 5px 7px; font-size: 7px; }
+	.coordinator-label { font-size: 7px; }
+	.coordinator-overlay h3 { margin: 6px 0 4px; font-size: clamp(1.25rem, 7vw, 1.8rem); }
+	.coordinator-overlay p { font-size: 7px; }
+	.coordinator-overlay small { margin-top: 6px; font-size: 9px; }
+	.coordinator-arrow { right: 14px; bottom: 16px; width: 15px; }
+	.stats-grid { margin-top: 42px; gap: 18px 10px; }
+	.stat { gap: 6px; padding-top: 11px; }
+	.stat strong { font-size: clamp(1.5rem, 8vw, 2.2rem); }
+	.stat span { font-size: 9px; }
+	.sponsor-label p { margin-top: 9px; font-size: 10px; }
+	.marquee-track span { padding: 18px 25px; font-size: 10px; }
+	.register-section { margin-top: 58px; padding: 62px 0; }
+	.register-inner p { margin-top: 13px; font-size: 11px; }
+	.giant-button { width: min(48vw, 170px); height: min(48vw, 170px); margin-top: 27px; padding: 20px; }
+	.faq-section { padding-bottom: 58px; }
+	.faq-item button { grid-template-columns: 22px minmax(0, 1fr) auto; gap: 7px; padding: 16px 0; }
+	.faq-item strong { min-width: 0; font-size: 12px; line-height: 1.3; }
+	.faq-answer { padding-left: 29px; }
+	.faq-answer p { margin-bottom: 16px; font-size: 10px; line-height: 1.5; }
+	.contact-section { padding: 58px 0; }
+	.contact-grid { gap: 18px; }
+	.contact-details { gap: 12px; padding-top: 4px; }
+	.contact-details > a { min-width: 0; font-size: 10px; overflow-wrap: anywhere; }
+	.socials { margin-top: 9px; }
+	.footer { gap: 12px; padding: 18px 0; font-size: 8px; }
+	.footer-links { gap: 8px; }
+	.footer-links button { font-size: 8px; }
+	.event-modal { width: calc(100vw - 24px); max-height: calc(100vh - 24px); padding: 23px 16px; border-radius: 14px; }
+	.event-modal h2 { margin: 12px 0 8px; font-size: clamp(1.8rem, 9vw, 2.5rem); }
+	.event-modal > p { font-size: 11px; line-height: 1.5; }
+	.modal-facts { gap: 7px; padding: 12px 0; margin: 13px 0; }
+	.modal-facts span { min-width: 0; font-size: 8px; overflow-wrap: anywhere; }
+	.modal-sections { gap: 11px; }
+	.modal-sections p, .event-modal ul { font-size: 10px; line-height: 1.5; }
+}
+@media (max-width: 430px) {
+	.container { width: calc(100% - 24px); }
+	.hero { padding-top: 70px; }
+	.hero h1 { font-size: clamp(2.8rem, 15vw, 4.3rem); }
+	.hero-visual { height: clamp(215px, 63vw, 270px); }
+	.hero-details { grid-template-columns: 1fr 1fr; }
+	.hero-details p { grid-column: 1 / -1; }
+	.hero-meta { font-size: 7px; }
+	.countdown-units { gap: 1px; }
+	.countdown strong { font-size: 13px; }
+	.card-bottom { font-size: 6.5px; }
+	.schedule-coming { padding-inline: 12px; }
+	.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 265px; }
+	.coordinator-hod { min-height: 315px; }
+	.footer-links { gap: 7px; }
+}
+@media (max-width: 360px) {
+	.nav { padding-left: 9px; }
+	.brand { font-size: 9px; }
+	.hero h1 { font-size: 2.65rem; }
+	.hero-statement { font-size: 1rem; }
+	.hero-actions .button { font-size: 6.5px; padding-inline: 5px; }
+	.hero-actions svg { width: 12px; }
+	.event-card { grid-template-columns: minmax(0, 1fr) minmax(84px, 31%); }
+	.card-bottom { font-size: 6px; }
+	.filter-row button { padding-inline: 8px; }
+	.faq-item strong { font-size: 11px; }
+}
+
+@media (max-width: 768px) {
+	html { overflow-x: clip; }
+	body { overflow-x: clip; }
+	.marquee { overflow: clip; }
+	.hero { min-height: 0; display: flex; flex-direction: column; padding-top: 70px; padding-bottom: 10px; }
+	.hero-copy { padding: 8px 0 0; }
+	.eyebrow { margin-bottom: 11px; }
+	.hero h1 { font-size: clamp(2.85rem, 15vw, 4.8rem); }
+	.hero-category { margin-top: 8px; }
+	.hero-statement { margin: 12px 0 8px; font-size: clamp(1rem, 4.8vw, 1.4rem); }
+	.hero-tagline { margin: 11px 0 4px; font-size: 13px; }
+	.hero-intro { margin-bottom: 8px; font-size: 10px; line-height: 1.4; }
+	.hero-details { margin: 8px 0 10px; padding: 8px 0; gap: 5px 12px; }
+	.hero-details strong { font-size: 15px; }
+	.hero-details p { font-size: 6px; }
+	.hero-actions .button { min-height: 36px; padding: 9px 6px; }
+	.hero-meta { margin-top: 9px; }
+	.hero-visual { height: clamp(215px, 63vw, 285px); margin: 0; }
+	.hero-visual .visual-caption { bottom: 3px; }
+	.countdown { position: static; width: 100%; margin-top: 3px; padding: 8px 10px; }
+	.countdown-units { margin-top: 4px; }
+	.countdown strong { font-size: 14px; }
+	.section, .sponsors { padding-top: 50px; }
+	.section-heading { margin-bottom: 20px; }
+	.section-heading h2, .about-grid h2, .register-inner h2, .contact-grid h2 { font-size: clamp(2rem, 10vw, 3.4rem); }
+	.section-heading > p { margin-top: 10px; font-size: 10px; }
+	.schedule-section, .about-section { margin-top: 48px; padding-bottom: 50px; }
+	.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 250px; }
+	.coordinator-hod { min-height: 300px; }
+	.stats-grid { margin-top: 35px; gap: 14px 9px; }
+	.register-section { margin-top: 48px; padding: 55px 0; }
+	.faq-section { padding-bottom: 50px; }
+	.contact-section { padding: 50px 0; }
+	.footer { padding: 16px 0; gap: 10px; }
+	.event-modal { width: calc(100vw - 20px); max-height: calc(100vh - 20px); padding: 20px 14px; }
+}
+@media (max-width: 430px) {
+	.container { width: calc(100% - 22px); }
+	.nav { height: 46px; }
+	.nav-links { inset: 59px 11px auto; }
+	.hero { padding-top: 66px; }
+	.hero h1 { font-size: clamp(2.55rem, 14.5vw, 4.1rem); }
+	.hero-visual { height: clamp(205px, 59vw, 260px); }
+	.event-card { grid-template-columns: minmax(0, 1fr) minmax(82px, 31%); padding: 11px 0; }
+	.card-bottom { font-size: 6.5px; }
+	.filter-row button { padding: 6px 8px; }
+	.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 235px; }
+	.coordinator-hod { min-height: 290px; }
+}
+@media (max-width: 360px) {
+	.hero h1 { font-size: 2.5rem; }
+	.hero-statement { font-size: .96rem; }
+	.hero-actions .button { font-size: 6px; padding-inline: 4px; }
+	.event-card { grid-template-columns: minmax(0, 1fr) minmax(78px, 30%); }
+	.card-bottom { font-size: 6px; }
+	.faq-item strong { font-size: 10px; }
+}
+
+.card-meta-team, .card-meta-fee { display: none; }
+@media (max-width: 768px) {
+	.hero { min-height: 0; display: flex; flex-direction: column; align-items: stretch; padding-top: 92px; padding-bottom: 18px; }
+	.hero-copy { order: 1; padding: 18px 0 0; }
+	.eyebrow { margin-bottom: 17px; }
+	.hero h1 { font-size: clamp(3.45rem, 16vw, 5.7rem); line-height: .83; }
+	.hero h1 span { padding-top: 9px; }
+	.hero-category { margin-top: 14px; }
+	.hero-statement { margin: 20px 0 12px; font-size: clamp(1.14rem, 5.4vw, 1.7rem); }
+	.hero-tagline { margin: 18px 0 6px; font-size: 14px; }
+	.hero-intro { margin-bottom: 15px; font-size: 11px; line-height: 1.5; }
+	.hero-details { gap: 8px 18px; margin: 15px 0 17px; padding: 12px 0; }
+	.hero-details strong { font-size: 17px; }
+	.hero-details p { font-size: 7px; line-height: 1.4; }
+	.hero-actions { width: 100%; gap: 8px; }
+	.hero-actions .button { flex: 1 1 0; min-width: 0; justify-content: center; padding: 12px 8px; font-size: 8px; }
+	.hero-meta { gap: 5px; margin-top: 18px; }
+	.hero-visual { order: 2; width: 100%; height: 310px; margin: 0; }
+	.hero-visual .orbit-label { display: none; }
+	.hero-visual .visual-caption { bottom: 12px; }
+	.countdown { position: static; order: 3; width: 100%; margin-top: 8px; padding: 11px 14px; }
+	.countdown-units { margin-top: 7px; }
+	.countdown strong { font-size: 18px; }
+	.hero-scroll, .hero-rail { display: none; }
+	.event-grid { width: 100%; }
+	.event-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(108px, auto); grid-template-rows: auto auto; align-items: start; gap: 5px 12px; min-width: 0; padding: 15px 0; }
+	.event-card:hover { padding-left: 0; }
+	.card-top { display: block; grid-column: 1; grid-row: 1; min-width: 0; }
+	.card-top > span:first-child { position: static; display: block; min-width: 0; color: var(--muted); font-size: 8px; line-height: 1.2; }
+	.event-icon { display: none; }
+	.event-card h3 { grid-column: 1; grid-row: 2; min-width: 0; margin: 0; font-size: clamp(1.05rem, 5.2vw, 1.45rem); line-height: 1.05; overflow-wrap: anywhere; }
+	.event-card p, .event-art { display: none; }
+	.card-bottom { grid-column: 2; grid-row: 1 / span 2; min-width: 0; align-items: flex-end; gap: 5px; padding-top: 1px; text-align: right; font-size: 8px; line-height: 1.2; }
+	.card-bottom .card-meta-combined { display: none; }
+	.card-bottom .card-meta-team, .card-bottom .card-meta-fee, .card-bottom span:last-child { display: inline-flex; opacity: 1; white-space: normal; }
+	.card-bottom span:last-child { color: var(--blue); }
+	.filter-row { max-width: 100%; gap: 6px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 2px; }
+	.filter-row button { flex: 0 0 auto; padding: 8px 10px; font-size: 8px; }
+}
+
 .schedule-coming { position: relative; overflow: hidden; padding: 34px; border: 1px solid rgba(255,255,255,.9); border-radius: 24px; background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(214,237,255,.58)); box-shadow: 0 22px 50px rgba(46,96,146,.1), inset 0 1px rgba(255,255,255,.9); }
 .schedule-coming::before { content: ''; position: absolute; width: 310px; height: 310px; right: -100px; top: -150px; border: 1px solid rgba(23,102,223,.14); border-radius: 50%; box-shadow: 0 0 0 28px rgba(23,102,223,.035), 0 0 0 56px rgba(201,151,43,.035); }
 .schedule-status { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid rgba(23,102,223,.22); border-radius: 999px; color: var(--blue); background: rgba(255,255,255,.62); font: 9px 'DM Mono', monospace; letter-spacing: .12em; }.schedule-status b { color: var(--charcoal); font-weight: 500; }.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201,151,43,.12); }
@@ -124,3 +353,15 @@ h1 { color: var(--charcoal); font-size: clamp(4.4rem, 8vw, 8.8rem); letter-spaci
 .modal-backdrop { background: rgba(10,32,67,.58); }.event-modal { border-radius: 18px; border-color: rgba(255,255,255,.72); box-shadow: 0 30px 90px rgba(10,40,84,.25); }
 @media (max-width: 900px) { .hero { padding-top: 145px; }.hero-rail { right: -10px; }.hero-copy { padding-bottom: 10px; } }
 @media (max-width: 580px) { .nav { border-radius: 18px; }.hero { padding-top: 120px; }.hero-copy { padding-top: 25px; }.hero h1 { font-size: clamp(4rem, 19vw, 6rem); }.hero-details { margin-top: 21px; gap: 11px 20px; }.hero-details strong { font-size: 18px; }.hero-actions { flex-wrap: nowrap; }.button { padding: 13px 12px; font-size: 8px; }.hero-rail { display: none; }.hero-scroll { bottom: 8px; }.hero-visual { height: 355px; }.countdown { bottom: 0; }.hero::after { width: 100%; right: -20%; top: 38%; height: 35%; } }
+
+@media (max-width: 768px) {
+	html, body { overflow-x: clip; }
+	.app-shell, main, .hero, .schedule-section, .register-section { overflow-x: clip; }
+	.marquee { overflow: hidden; }
+	.marquee-track { width: 100%; flex-wrap: wrap; animation: none; transform: none; }
+	.marquee-track span { flex: 1 1 33%; justify-content: center; padding: 12px 7px; font-size: 7px; letter-spacing: .08em; }
+	.nav-wrap { padding: 9px 0; }.nav { height: 48px; padding: 0 9px 0 12px; border-radius: 15px; }.brand { font-size: 10px; }.brand-mark { width: 24px; height: 24px; }.nav-links { inset: 64px 14px auto; max-height: calc(100vh - 80px); overflow-y: auto; padding: 12px 15px; border-radius: 15px; }.nav-links button { padding: 8px 0; }.nav-register { margin-top: 5px; }
+	.hero { min-height: 0; display: flex; flex-direction: column; padding-top: 70px; padding-bottom: 10px; }.hero-copy { padding: 8px 0 0; }.eyebrow { margin-bottom: 11px; }.hero h1 { font-size: clamp(2.85rem, 15vw, 4.8rem); }.hero h1 span { padding-top: 6px; }.hero-category { margin-top: 8px; }.hero-statement { margin: 12px 0 8px; font-size: clamp(1rem, 4.8vw, 1.4rem); }.hero-tagline { margin: 11px 0 4px; font-size: 13px; }.hero-intro { margin-bottom: 8px; font-size: 10px; line-height: 1.4; }.hero-details { margin: 8px 0 10px; padding: 8px 0; gap: 5px 12px; }.hero-details strong { font-size: 15px; }.hero-details p { font-size: 6px; }.hero-actions .button { min-height: 36px; padding: 9px 6px; }.hero-meta { margin-top: 9px; }.hero-visual { height: clamp(215px, 63vw, 285px); margin: 0; }.hero-visual .visual-caption { bottom: 3px; }.countdown { position: static; width: 100%; margin-top: 3px; padding: 8px 10px; }.countdown-units { margin-top: 4px; }.countdown strong { font-size: 14px; }.section, .sponsors { padding-top: 50px; }.section-heading { margin-bottom: 20px; }.section-heading h2, .about-grid h2, .register-inner h2, .contact-grid h2 { font-size: clamp(2rem, 10vw, 3.4rem); }.section-heading > p { margin-top: 10px; font-size: 10px; }.schedule-section, .about-section { margin-top: 48px; padding-bottom: 50px; }.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 250px; }.coordinator-hod { min-height: 300px; }.stats-grid { margin-top: 35px; gap: 14px 9px; }.register-section { margin-top: 48px; padding: 55px 0; }.faq-section { padding-bottom: 50px; }.contact-section { padding: 50px 0; }.footer { padding: 16px 0; gap: 10px; }.event-modal { width: calc(100vw - 20px); max-height: calc(100vh - 20px); padding: 20px 14px; }
+}
+@media (max-width: 430px) { .container { width: calc(100% - 22px); }.nav { height: 46px; }.nav-links { inset: 59px 11px auto; }.hero { padding-top: 66px; }.hero h1 { font-size: clamp(2.55rem, 14.5vw, 4.1rem); }.hero-visual { height: clamp(205px, 59vw, 260px); }.event-card { grid-template-columns: minmax(0, 1fr) minmax(82px, 31%); padding: 11px 0; }.card-bottom { font-size: 6.5px; }.coordinator-card, .coordinator-hod, .coordinator-faculty, .coordinator-student, .coordinator-student:nth-child(4) { min-height: 235px; }.coordinator-hod { min-height: 290px; } }
+@media (max-width: 360px) { .hero h1 { font-size: 2.5rem; }.hero-statement { font-size: .96rem; }.hero-actions .button { font-size: 6px; padding-inline: 4px; }.event-card { grid-template-columns: minmax(0, 1fr) minmax(78px, 30%); }.card-bottom { font-size: 6px; }.faq-item strong { font-size: 10px; } }
