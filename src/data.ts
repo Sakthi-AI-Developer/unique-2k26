@@ -27,7 +27,7 @@ export const events: EventItem[] = [
 
 export type Coordinator = {
   name: string
-  label: 'HEAD OF DEPARTMENT' | 'FACULTY COORDINATOR' | 'STUDENT COORDINATOR'
+  label: 'HEAD OF DEPARTMENT OF CSE' | 'FACULTY COORDINATOR' | 'STUDENT COORDINATOR'
   designation: string
   department: string
   year?: string
