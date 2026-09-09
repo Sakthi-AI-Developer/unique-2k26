@@ -186,6 +186,79 @@ function Scene() {
   return <div ref={mountRef} className="scene" aria-label="Interactive 3D Dhanalakshmi Srinivasan Engineering College emblem" role="img" />
 }
 
+function PriceDisplay({ suffix = 'per person', className = '' }: { suffix?: string; className?: string }) {
+  return <span className={`price-display ${className}`}><strong>{siteConfig.fee.replace(' per person', '')}</strong><small>{suffix}</small></span>
+}
+
+function GlassCoordinatorVisual({ index }: { index: number }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const shapeRef = useRef<HTMLDivElement>(null)
+  const isMobile = window.matchMedia('(max-width: 768px)').matches
+
+  useEffect(() => {
+    if (isMobile || !containerRef.current || !shapeRef.current) return
+    const container = containerRef.current
+    const shape = shapeRef.current
+    let frame = 0
+    let lastTime = performance.now()
+    let targetX = 0
+    let targetY = 0
+    let currentX = 0
+    let currentY = 0
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const rect = container.getBoundingClientRect()
+      targetX = Math.max(-1, Math.min(1, (event.clientX - rect.left - rect.width / 2) / (rect.width / 2)))
+      targetY = Math.max(-1, Math.min(1, (event.clientY - rect.top - rect.height / 2) / (rect.height / 2)))
+    }
+
+    const handlePointerLeave = () => { targetX = 0; targetY = 0 }
+    const animate = (time: number) => {
+      const elapsed = time - lastTime
+      lastTime = time
+      currentX += (targetX - currentX) * Math.min(1, elapsed * 0.012)
+      currentY += (targetY - currentY) * Math.min(1, elapsed * 0.012)
+      const phase = time * 0.001
+      const floatX = Math.sin(phase * 0.7 + index) * 5
+      const floatY = Math.cos(phase * 0.55 + index) * 6
+      const rotation = phase * (index % 2 ? 7 : -6)
+      shape.style.transform = `translate3d(${floatX + currentX * 5}px, ${floatY + currentY * 5}px, 18px) rotateX(${currentY * 5}deg) rotateY(${rotation + currentX * 7}deg) rotateZ(${rotation * 0.45}deg)`
+      frame = requestAnimationFrame(animate)
+    }
+
+    container.addEventListener('pointermove', handlePointerMove, { passive: true })
+    container.addEventListener('pointerleave', handlePointerLeave)
+    frame = requestAnimationFrame(animate)
+    return () => {
+      cancelAnimationFrame(frame)
+      container.removeEventListener('pointermove', handlePointerMove)
+      container.removeEventListener('pointerleave', handlePointerLeave)
+    }
+  }, [isMobile])
+
+  const shapeClasses = ['glass-shape-sphere', 'glass-shape-cube', 'glass-shape-orb', 'glass-shape-crystal', 'glass-shape-wave', 'glass-shape-globe']
+
+  return (
+    <div ref={containerRef} className="glass-coordinator-visual" style={{ perspective: '1200px' }}>
+      <div className="glass-background" />
+      <div className="glass-container" style={{ transformStyle: 'preserve-3d', height: '100%' }}>
+        <div
+          ref={shapeRef}
+          className={`glass-shape ${shapeClasses[index] || shapeClasses[0]}`}
+          style={{ willChange: 'transform', animation: 'none' }}
+        >
+          <div className="glass-shape-inner" />
+        </div>
+        {index === 0 && <div className="glass-orbit-ring" />}
+        {index === 4 && <div className="glass-wave-line glass-wave-line-secondary" />}
+        {index === 5 && <div className="glass-globe-latitude glass-globe-latitude-secondary" />}
+      </div>
+      <div className="glass-glow glass-glow-1" />
+      <div className="glass-glow glass-glow-2" />
+    </div>
+  )
+}
+
 function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
@@ -266,7 +339,7 @@ function App() {
           <motion.h2 {...reveal} className="hero-statement">ONE CAMPUS.<br />TEN CHALLENGES.<br /><i>ONE UNIQUE EXPERIENCE.</i></motion.h2>
           <motion.p {...reveal} className="hero-tagline">{siteConfig.tagline}</motion.p>
           <motion.p {...reveal} className="hero-intro">Technology, creativity, innovation, and entertainment in one shared campus experience.</motion.p>
-          <motion.div {...reveal} className="hero-details"><div><span>ENTRY</span><strong>{siteConfig.fee.replace(' per person', '')}<small> / PERSON</small></strong></div><div><span>TEAM SIZE</span><strong>{siteConfig.teamSize}</strong></div><p><b>{siteConfig.participationRule}</b></p></motion.div>
+          <motion.div {...reveal} className="hero-details"><div><span>ENTRY</span><PriceDisplay suffix=" / PERSON" /></div><div><span>TEAM SIZE</span><strong>{siteConfig.teamSize}</strong></div><p><b>{siteConfig.participationRule}</b></p></motion.div>
           <motion.div {...reveal} className="hero-actions"><a href={siteConfig.registrationUrl} className="button button-primary" data-cursor>Register now <ArrowUpRight size={18} /></a><button className="button button-quiet" onClick={() => scrollTo('events')} data-cursor>Explore events <ArrowDownRight size={18} /></button></motion.div>
           <motion.div {...reveal} className="hero-meta"><span><CalendarDays size={14} /> {siteConfig.dateLabel}</span><span><MapPin size={14} /> {siteConfig.venue}</span></motion.div>
         </div>
@@ -275,17 +348,17 @@ function App() {
         <div className="hero-scroll"><span>SCROLL DOWN</span><i /></div><div className="hero-rail" aria-hidden="true"><span className="active">01</span><i /><span>02</span><i /><span>03</span><i /><span>04</span></div>
       </section>
 
-      <section id="events" className="section container"><motion.div {...reveal} className="section-heading"><div><span className="section-kicker">01 / THE EVENT DIRECTORY</span><h2>Choose your <i>challenge.</i></h2></div><p>Ten ways to make the weekend yours. Select one Technical and one Non-Technical event per team.</p></motion.div><div className="participation-rule"><strong>{siteConfig.participationRule}</strong><span>Registration fee: {siteConfig.fee} · Team size: {siteConfig.teamSize}</span><small>ONE TEAM CAN SELECT ONE TECHNICAL + ONE NON-TECHNICAL EVENT.</small></div><div className="filter-row" role="group" aria-label="Filter events">{(['ALL', 'TECHNICAL', 'NON-TECHNICAL'] as const).map((filter) => <button key={filter} className={eventFilter === filter ? 'active' : ''} onClick={() => setEventFilter(filter)} aria-pressed={eventFilter === filter}>{filter}</button>)}</div><div className="event-grid">{filteredEvents.map((event, index) => <motion.button initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .4, delay: index * .04 }} className="event-card" key={`${eventFilter}-${event.id}`} onClick={() => setSelectedEvent(event)} data-cursor><div className="card-top"><span>{event.id} / {event.category}</span><span className="event-icon">{event.id}</span></div><div className="event-art"><span>{event.title.slice(0, 1)}</span><div className="art-grid" /></div><h3>{event.title}</h3><p><b>{event.type}</b><br />{event.description}</p><div className="card-bottom"><span className="card-meta-combined">{siteConfig.teamSize} · {siteConfig.fee}</span><span className="card-meta-team">{siteConfig.teamSize}</span><span className="card-meta-fee">{siteConfig.fee}</span><span>View event <ArrowUpRight size={15} /></span></div></motion.button>)}</div></section>
+      <section id="events" className="section container"><motion.div {...reveal} className="section-heading"><div><span className="section-kicker">01 / THE EVENT DIRECTORY</span><h2>Choose your <i>challenge.</i></h2></div><p>Ten ways to make the weekend yours. Select one Technical and one Non-Technical event per team.</p></motion.div><div className="participation-rule"><strong>{siteConfig.participationRule}</strong><span>Registration fee: <PriceDisplay /> · Team size: {siteConfig.teamSize}</span><small>ONE TEAM CAN SELECT ONE TECHNICAL + ONE NON-TECHNICAL EVENT.</small></div><div className="filter-row" role="group" aria-label="Filter events">{(['ALL', 'TECHNICAL', 'NON-TECHNICAL'] as const).map((filter) => <button key={filter} className={eventFilter === filter ? 'active' : ''} onClick={() => setEventFilter(filter)} aria-pressed={eventFilter === filter}>{filter}</button>)}</div><div className="event-grid">{filteredEvents.map((event, index) => <motion.button initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .4, delay: index * .04 }} className="event-card" key={`${eventFilter}-${event.id}`} onClick={() => setSelectedEvent(event)} data-cursor><div className="card-top"><span>{event.id} / {event.category}</span><span className="event-icon">{event.id}</span></div><div className="event-art"><span>{event.title.slice(0, 1)}</span><div className="art-grid" /></div><h3>{event.title}</h3><p><b>{event.type}</b><br />{event.description}</p><div className="card-bottom"><span className="card-meta-combined">{siteConfig.teamSize} · <PriceDisplay /></span><span className="card-meta-team">{siteConfig.teamSize}</span><span className="card-meta-fee"><PriceDisplay /></span><span>View event <ArrowUpRight size={15} /></span></div></motion.button>)}</div></section>
 
       <section id="schedule" className="section schedule-section"><div className="container"><motion.div {...reveal} className="section-heading"><div><span className="section-kicker">03 / THE TIMELINE</span><h2>Your day. Your <i>moment.</i></h2></div><p>The complete schedule and event timings will be announced soon.</p></motion.div><motion.div {...reveal} className="schedule-coming"><div className="schedule-status"><span className="status-dot" /> SCHEDULE <b>COMING SOON</b></div><div className="schedule-facts"><div><span>EVENT DAY</span><strong>08 OCTOBER 2026</strong></div><div><span>TIMINGS</span><strong>9:00 AM ONWARDS</strong></div><div><span>VENUE</span><strong>MINI AUDITORIUM</strong></div></div><div className="schedule-roadmap" aria-label="Planned event flow, details to be announced"><div><b>01</b><span>EVENTS</span></div><i /><div><b>02</b><span>COMPETITIONS</span></div><i /><div><b>03</b><span>FINALS</span></div><i /><div><b>04</b><span>PRIZE CEREMONY</span></div></div><small className="schedule-note">A single-day symposium flow. Official sequence and timings will be shared after confirmation.</small></motion.div></div></section>
 
-      <section id="coordinators" className="section container coordinator-section"><motion.div {...reveal} className="section-heading"><div><span className="section-kicker">04 / COORDINATORS</span><h2>The people behind<br /><i>UNIQUE 2K26.</i></h2></div><p>Meet the faculty and student coordinators making UNIQUE 2K26 possible.</p></motion.div><div className="coordinator-grid">{coordinators.map((coordinator, index) => <motion.article {...reveal} transition={{ ...reveal.transition, delay: index * 0.08 }} className={`coordinator-card coordinator-${index === 0 ? 'hod' : index < 3 ? 'faculty' : 'student'}`} key={`${coordinator.name}-${index}`}><div className="coordinator-image" style={{ backgroundImage: `url(${coordinator.image})` }} /><div className="coordinator-overlay"><span className="coordinator-label">{coordinator.label}</span><h3>{coordinator.name}</h3><p>{coordinator.designation} · {coordinator.department}{coordinator.year ? ` · ${coordinator.year}` : ''}</p><small>{coordinator.bio}</small></div><span className="coordinator-role">{coordinator.role}</span><MoveUpRight size={17} className="coordinator-arrow" /></motion.article>)}</div></section>
+      <section id="coordinators" className="section coordinator-section"><div className="container coordinator-wrapper"><motion.div {...reveal} className="coordinator-editorial"><span className="section-kicker">04 / COORDINATORS</span><h2>The people behind<br /><i>UNIQUE 2K26.</i></h2><p>Meet the faculty and student coordinators making UNIQUE 2K26 possible.</p></motion.div><div className="coordinator-grid">{coordinators.map((coordinator, index) => <motion.article {...reveal} transition={{ ...reveal.transition, delay: index * 0.06 }} className={`coordinator-card coordinator-${index === 0 ? 'hod' : index < 3 ? 'faculty' : 'student'}`} key={`${coordinator.name}-${index}`}><GlassCoordinatorVisual index={index} /><div className="coordinator-overlay"><span className="coordinator-label">{coordinator.label}</span><h3>{coordinator.name}</h3><p>{coordinator.designation} · {coordinator.department}{coordinator.year ? ` · ${coordinator.year}` : ''}</p><small>{coordinator.bio}</small></div><MoveUpRight size={16} className="coordinator-arrow" /></motion.article>)}</div></div></section>
 
-      <section id="about" className="section about-section"><div className="container about-grid"><motion.div {...reveal}><span className="section-kicker">05 / THE IDEA</span><h2>10 EVENTS.<br /><i>LIMITLESS CREATIVITY.</i></h2></motion.div><motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.1 }} className="about-copy"><p>UNIQUE 2K26 is a college symposium bringing students together through technology, creativity, innovation, and entertainment.</p><p>Ten challenges, two categories, and one campus full of people ready to think differently. Bring your team, choose your one event, and make the experience your own.</p><a href="https://dsengg.ac.in/" target="_blank" rel="noreferrer" className="text-link">Meet us on campus <ArrowRight size={16} /></a></motion.div></div><div className="container stats-grid">{[['10', 'events'], ['2', 'categories'], ['1–4', 'members'], ['₹300', 'per person']].map(([number, label]) => <div className="stat" key={label}><strong>{number}</strong><span>{label}</span></div>)}</div></section>
+      <section id="about" className="section about-section"><div className="container about-grid"><motion.div {...reveal}><span className="section-kicker">05 / THE IDEA</span><h2>10 EVENTS.<br /><i>LIMITLESS CREATIVITY.</i></h2></motion.div><motion.div {...reveal} transition={{ ...reveal.transition, delay: 0.1 }} className="about-copy"><p>UNIQUE 2K26 is a college symposium bringing students together through technology, creativity, innovation, and entertainment.</p><p>Ten challenges, two categories, and one campus full of people ready to think differently. Bring your team, choose your one event, and make the experience your own.</p><a href="https://dsengg.ac.in/" target="_blank" rel="noreferrer" className="text-link">Meet us on campus <ArrowRight size={16} /></a></motion.div></div><div className="container stats-grid">{[['10', 'events'], ['2', 'categories'], ['1–4', 'members']].map(([number, label]) => <div className="stat" key={label}><strong>{number}</strong><span>{label}</span></div>)}<div className="stat stat-price"><PriceDisplay /></div></div></section>
 
       <section className="sponsors container"><motion.div {...reveal} className="sponsor-label"><span className="section-kicker">05 / IN GOOD COMPANY</span><p>Partner wall · names to be announced.</p></motion.div><div className="marquee" aria-label="Partners"><div className="marquee-track">{['CAMPUS PARTNER', 'KNOWLEDGE PARTNER', 'COMMUNITY PARTNER', 'CAMPUS PARTNER', 'KNOWLEDGE PARTNER', 'COMMUNITY PARTNER'].map((sponsor, index) => <span key={`${sponsor}-${index}`}><Sparkles size={13} /> {sponsor}</span>)}</div></div></section>
 
-      <section id="register" className="register-section"><div className="container register-inner"><motion.div {...reveal}><span className="section-kicker">THE NEXT MOVE IS YOURS</span><h2>READY TO MAKE<br /><i>IT UNIQUE?</i></h2><p>{siteConfig.fee} · Team size {siteConfig.teamSize}</p></motion.div><motion.a {...reveal} transition={{ ...reveal.transition, delay: 0.12 }} className="giant-button" href={siteConfig.registrationUrl} data-cursor><span>Register now</span><ArrowUpRight /></motion.a></div></section>
+      <section id="register" className="register-section"><div className="container register-inner"><motion.div {...reveal}><span className="section-kicker">THE NEXT MOVE IS YOURS</span><h2>READY TO MAKE<br /><i>IT UNIQUE?</i></h2><p><PriceDisplay /> · Team size {siteConfig.teamSize}</p></motion.div><motion.a {...reveal} transition={{ ...reveal.transition, delay: 0.12 }} className="giant-button" href={siteConfig.registrationUrl} data-cursor><span>Register now</span><ArrowUpRight /></motion.a></div></section>
 
       <section id="faq" className="section container faq-section"><motion.div {...reveal} className="section-heading"><div><span className="section-kicker">06 / THE FINE PRINT</span><h2>Questions, <i>answered.</i></h2></div></motion.div><div className="faq-list">{faqs.map(([question, answer], index) => <div className={`faq-item ${openFaq === index ? 'open' : ''}`} key={question}><button onClick={() => setOpenFaq(openFaq === index ? null : index)} aria-expanded={openFaq === index}><span>0{index + 1}</span><strong>{question}</strong><ChevronDown size={19} /></button><AnimatePresence initial={false}>{openFaq === index && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="faq-answer"><p>{answer}</p></motion.div>}</AnimatePresence></div>)}</div></section>
 
@@ -294,7 +367,7 @@ function App() {
 
     <footer className="footer container"><div className="footer-brand"><span className="brand-mark">U</span><span>UNIQUE <em>2K26</em></span></div><span>Where Ideas Become Unique.</span><span>© 2026 UNIQUE 2K26</span><div className="footer-links"><button onClick={() => scrollTo('events')}>Events</button><button onClick={() => scrollTo('schedule')}>Schedule</button><button onClick={() => scrollTo('coordinators')}>Coordinators</button><button onClick={() => scrollTo('about')}>About</button><button onClick={() => scrollTo('faq')}>FAQ</button><button onClick={() => scrollTo('contact')}>Contact</button></div><button onClick={() => scrollTo('home')} aria-label="Back to top"><CircleArrowUp size={18} /></button></footer>
 
-    <AnimatePresence>{selectedEvent && <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedEvent(null)}><motion.div className="event-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 25 }} onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setSelectedEvent(null)} aria-label="Close event details"><X /></button><span className="section-kicker">{selectedEvent.category} / {selectedEvent.id}</span><h2 id="modal-title">{selectedEvent.title}</h2><p>{selectedEvent.description}</p><div className="modal-facts"><span><Sparkles size={15} /> {selectedEvent.type}</span><span><Check size={15} /> {siteConfig.teamSize}</span><span><Ticket size={15} /> {siteConfig.fee}</span><span><MapPin size={15} /> {siteConfig.venue}</span></div><div className="modal-sections"><div><h3>Objective</h3><p>{selectedEvent.objective}</p></div><div><h3>Eligibility</h3><p>{selectedEvent.eligibility}</p></div><div><h3>What participants need</h3><p>{selectedEvent.needs}</p></div><div><h3>Judging / selection</h3><p>{selectedEvent.judging}</p></div><div><h3>Prizes</h3><p>Prize details to be announced.</p></div><div><h3>Event information</h3><p>{selectedEvent.information}</p></div></div><h3>Rules</h3><ul>{selectedEvent.rules.map((rule) => <li key={rule}>{rule}</li>)}</ul></motion.div></motion.div>}</AnimatePresence>
+    <AnimatePresence>{selectedEvent && <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedEvent(null)}><motion.div className="event-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 25 }} onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setSelectedEvent(null)} aria-label="Close event details"><X /></button><span className="section-kicker">{selectedEvent.category} / {selectedEvent.id}</span><h2 id="modal-title">{selectedEvent.title}</h2><p>{selectedEvent.description}</p><div className="modal-facts"><span><Sparkles size={15} /> {selectedEvent.type}</span><span><Check size={15} /> {siteConfig.teamSize}</span><span><Ticket size={15} /> <PriceDisplay /></span><span><MapPin size={15} /> {siteConfig.venue}</span></div><div className="modal-sections"><div><h3>Objective</h3><p>{selectedEvent.objective}</p></div><div><h3>Eligibility</h3><p>{selectedEvent.eligibility}</p></div><div><h3>What participants need</h3><p>{selectedEvent.needs}</p></div><div><h3>Judging / selection</h3><p>{selectedEvent.judging}</p></div><div><h3>Prizes</h3><p>Prize details to be announced.</p></div><div><h3>Event information</h3><p>{selectedEvent.information}</p></div></div><h3>Rules</h3><ul>{selectedEvent.rules.map((rule) => <li key={rule}>{rule}</li>)}</ul></motion.div></motion.div>}</AnimatePresence>
   </div>
 }
 
