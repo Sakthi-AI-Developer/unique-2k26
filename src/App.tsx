@@ -1410,7 +1410,7 @@ function App() {
               >
                 ONE CAMPUS.
                 <br />
-                TEN CHALLENGES.
+                EIGHT CHALLENGES.
                 <br />
                 <i>
                   ONE UNIQUE EXPERIENCE.
@@ -2061,7 +2061,7 @@ function App() {
                 </span>
 
                 <h2>
-                  10 EVENTS.
+                  {events.length} EVENTS.
                   <br />
                   <i>
                     LIMITLESS CREATIVITY.
@@ -2087,7 +2087,7 @@ function App() {
                 </p>
 
                 <p>
-                  Ten challenges, two
+                  Eight challenges, two
                   categories, and one campus
                   full of people ready to think
                   differently. Bring your team,
@@ -2644,7 +2644,7 @@ function App() {
                       size={15}
                     />
 
-                    {siteConfig.teamSize.replace(
+                    {(selectedEvent.teamSize || siteConfig.teamSize).replace(
                       'members',
                       'Members'
                     )}
@@ -2758,7 +2758,7 @@ function App() {
                     </h3>
 
                     <p>
-                      {
+                      {selectedEvent.prizes || (
                         selectedEvent.id ===
                           '01' ||
                         selectedEvent.id ===
@@ -2771,9 +2771,9 @@ function App() {
                           '05' ||
                         selectedEvent.id ===
                           '10'
-                          ? 'Prizes will be awarded to the top-performing participants/teams.'
-                          : 'Prize details to be announced.'
-                      }
+                            ? 'Prizes will be awarded to the top-performing participants/teams.'
+                            : 'Prize details to be announced.'
+                          )}
                     </p>
                   </div>
 
