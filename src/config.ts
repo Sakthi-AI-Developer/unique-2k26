@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: 'Where Ideas Become Unique.',
   dateLabel: '08 OCTOBER 2026',
   date: '2026-10-08T09:00:00+05:30',
-  venue: 'Mini-Auditorium, CSE Department, DSEC, Perambalur',
+  venue: 'Mini-Auditorium, Dhanalakshmi Srinivasan Engineering College, Perambalur',
   fee: '₹300 per person',
   teamSize: '1–4 members',
   participationRule: '1 Technical + 1 Non-Technical event per team',
