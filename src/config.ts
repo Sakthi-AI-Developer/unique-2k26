@@ -8,8 +8,8 @@ export const siteConfig = {
   teamSize: '1–4 members',
   participationRule: '1 Technical + 1 Non-Technical event per team',
   eventDay: 'One-day symposium',
-  registrationUrl: 'https://forms.gle/EWF7XMTzC7ndhxSU6',
-  email: 'dseccseunique2k26@gmail.com',
+  registrationUrl: 'https://forms.gle/WB9eH9XSbkux2HSW6',
+  email: 'CSEUnique2k26@gmail.com',
   phone: '+91 9943200919',
   contacts: {
     faculty: 'Faculty coordinator to be announced',

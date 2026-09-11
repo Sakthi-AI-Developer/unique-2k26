@@ -1336,6 +1336,8 @@ function App() {
                 href={
                   siteConfig.registrationUrl
                 }
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Ticket size={15} />
                 Register now
@@ -1475,6 +1477,8 @@ function App() {
                   href={
                     siteConfig.registrationUrl
                   }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="button button-primary"
                   data-cursor
                 >
@@ -2240,6 +2244,8 @@ function App() {
                 href={
                   siteConfig.registrationUrl
                 }
+                target="_blank"
+                rel="noopener noreferrer"
                 data-cursor
               >
                 <span>
