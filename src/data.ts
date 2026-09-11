@@ -57,4 +57,5 @@ export const faqs = [
   ['Can I participate individually?', 'Yes. Individual participation is welcome, and teams may have 1–4 members.'],
   ['How do I register?', 'Use the global REGISTER NOW link near the hero, navbar, or registration section.'],
   ['When will the schedule be announced?', 'The one-day schedule, timings, and venue will be announced soon.'],
+  ['Any Issue in Website?', 'If you encounter any issues with the website, please contact us at sakthi88705@gmail.com.']
 ]
