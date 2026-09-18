@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import * as THREE from 'three'
 
-import { coordinators, events, faqs, type EventItem } from './data'
+import { coordinators, events, faqs, itCoordinators, type EventItem } from './data'
 import { siteConfig } from './config'
 import LoadingScreen from './LoadingScreen'
 
@@ -670,8 +670,10 @@ function PriceDisplay({
 
 function GlassCoordinatorVisual({
   index,
+  visualOffset = 0,
 }: {
   index: number
+  visualOffset?: number
 }) {
   const containerRef =
     useRef<HTMLDivElement>(null)
@@ -843,6 +845,8 @@ function GlassCoordinatorVisual({
     'glass-shape-globe',
   ]
 
+  const visualIndex = index + visualOffset
+
   return (
     <div
       ref={containerRef}
@@ -864,7 +868,7 @@ function GlassCoordinatorVisual({
         <div
           ref={shapeRef}
           className={`glass-shape ${
-            shapeClasses[index] ||
+            shapeClasses[visualIndex] ||
             shapeClasses[0]
           }`}
           style={{
@@ -875,15 +879,15 @@ function GlassCoordinatorVisual({
           <div className="glass-shape-inner" />
         </div>
 
-        {index === 0 && (
+        {visualIndex === 0 && (
           <div className="glass-orbit-ring" />
         )}
 
-        {index === 4 && (
+        {visualIndex === 4 && (
           <div className="glass-wave-line glass-wave-line-secondary" />
         )}
 
-        {index === 5 && (
+        {visualIndex === 5 && (
           <div className="glass-globe-latitude glass-globe-latitude-secondary" />
         )}
       </div>
@@ -1295,7 +1299,7 @@ function App() {
               </span>
 
               <span>
-                UNIQUE{' '}
+                UNIQUE ZENTHRA |{' '}
                 <em>2K26</em>
               </span>
             </button>
@@ -1393,6 +1397,9 @@ function App() {
               <motion.h1 {...reveal}>
                 UNIQUE
                 <span>
+                  ZENTHRA
+                </span>
+                <span className="hero-event-name-year">
                   2K26
                 </span>
               </motion.h1>
@@ -1855,7 +1862,7 @@ function App() {
                     </span>
 
                     <strong>
-                      08 OCTOBER 2026
+                      {siteConfig.dateLabel}
                     </strong>
                   </div>
 
@@ -1865,7 +1872,7 @@ function App() {
                     </span>
 
                     <strong>
-                      9:00 AM ONWARDS
+                      9:00 A.M.
                     </strong>
                   </div>
 
@@ -1942,35 +1949,58 @@ function App() {
             id="coordinators"
             className="section coordinator-section"
           >
-            <div className="container coordinator-wrapper">
+            {[{ name: 'CSE', people: coordinators, visualOffset: 0 }, { name: 'IT', people: itCoordinators, visualOffset: 2 }].map(
+              (department, departmentIndex) => (
+                <div
+                  className={`container coordinator-wrapper coordinator-department${
+                    departmentIndex === 1 ? ' coordinator-department-it' : ''
+                  }`}
+                  key={department.name}
+                >
 
               <motion.div
                 {...reveal}
                 className="coordinator-editorial"
               >
                 <span className="section-kicker">
-                  04 / COORDINATORS
+                  04 / DEPARTMENT OF {department.name}
+                </span>
+
+                <span className="coordinator-department-name">
+                  Department of {department.name}
                 </span>
 
                 <h2>
                   The people behind
+                  {department.name === 'IT' && (
+                    <>
+                      {' '}
+                      <i className="coordinator-department-accent">
+                        ZENTHRA
+                      </i>
+                    </>
+                  )}
                   <br />
                   <i>
-                    UNIQUE 2K26.
+                    {department.name === 'IT'
+                      ? '2K26.'
+                      : 'UNIQUE 2K26.'}
                   </i>
                 </h2>
 
                 <p>
                   Meet the faculty and
                   student coordinators making
-                  UNIQUE 2K26 possible.
+                  {department.name === 'IT'
+                    ? ' ZENTHRA 2K26 possible.'
+                    : ' UNIQUE 2K26 possible.'}
                 </p>
               </motion.div>
 
 
               <div className="coordinator-grid">
 
-                {coordinators.map(
+                {department.people.map(
                   (
                     coordinator,
                     index
@@ -1996,6 +2026,9 @@ function App() {
                         index={
                           index
                         }
+                        visualOffset={
+                          department.visualOffset
+                        }
                       />
 
                       <div className="coordinator-overlay">
@@ -2012,25 +2045,29 @@ function App() {
                           }
                         </h3>
 
-                        <p>
-                          {
-                            coordinator.designation
-                          }{' '}
-                          ·{' '}
-                          {
-                            coordinator.department
-                          }
+                        {coordinator.designation && (
+                          <p>
+                            {
+                              coordinator.designation
+                            }{' '}
+                            ·{' '}
+                            {
+                              coordinator.department
+                            }
 
-                          {coordinator.year
-                            ? ` · ${coordinator.year}`
-                            : ''}
-                        </p>
+                            {coordinator.year
+                              ? ` · ${coordinator.year}`
+                              : ''}
+                          </p>
+                        )}
 
-                        <small>
-                          {
-                            coordinator.bio
-                          }
-                        </small>
+                        {coordinator.bio && (
+                          <small>
+                            {
+                              coordinator.bio
+                            }
+                          </small>
+                        )}
 
                       </div>
 
@@ -2043,7 +2080,9 @@ function App() {
                 )}
 
               </div>
-            </div>
+                </div>
+              )
+            )}
           </section>
 
 
@@ -2663,6 +2702,7 @@ function App() {
                     />
 
                     {
+                      selectedEvent.venue ||
                       siteConfig.venue
                     }
                   </span>
@@ -2732,7 +2772,12 @@ function App() {
                       '10' && (
                       <div>
                         <h3>
-                          What participants need
+                          {selectedEvent.id === '03'
+                            || selectedEvent.id === '04'
+                            || selectedEvent.id === '06'
+                            || selectedEvent.id === '07'
+                            ? 'How it works'
+                            : 'What participants need'}
                         </h3>
 
                         <p>
