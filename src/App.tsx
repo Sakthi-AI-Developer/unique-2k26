@@ -24,6 +24,31 @@ import { coordinators, events, faqs, itCoordinators, type EventItem } from './da
 import { siteConfig } from './config'
 import LoadingScreen from './LoadingScreen'
 
+const campusPartners = [
+  { name: 'Wipro', logo: '/images/campus-partners/wipro.png' },
+  { name: 'Tech Mahindra', logo: '/images/campus-partners/tech-mahindra.png' },
+  { name: 'ICICI Bank', logo: '/images/campus-partners/icici-bank.png' },
+  { name: 'Zifo', logo: '/images/campus-partners/zifo.png' },
+  { name: 'Zebronics', logo: '/images/campus-partners/zebronics.png' },
+  { name: 'Exceelacom', logo: '/images/campus-partners/exceelacom.png' },
+  { name: 'CHGS – Hinduja Global Solutions', logo: '/images/campus-partners/chgs.png' },
+  { name: 'TNQ', logo: '/images/campus-partners/tnq.png' },
+  { name: 'Surya Informatics Solutions Pvt. Ltd.', logo: '/images/campus-partners/surya-informatics.png' },
+  { name: 'Ridsys', logo: '/images/campus-partners/ridsys.png' },
+  { name: 'Windcare India Pvt. Ltd.', logo: '/images/campus-partners/windcare.png' },
+  { name: 'Wockhardt', logo: '/images/campus-partners/wockhardt.png' },
+  { name: 'Focus Edumatics', logo: '/images/campus-partners/focus-edumatics.png' },
+  { name: 'Excelencia', logo: '/images/campus-partners/excelencia.png' },
+  { name: 'Aagna Corporate Services Pvt Ltd', logo: '/images/campus-partners/aagna.png' },
+  { name: 'SansPareil', logo: '/images/campus-partners/sanspareil.png' },
+  { name: 'Rustomjee', logo: '/images/campus-partners/rustomjee.png' },
+]
+
+const campusPartnerGroups = Array.from(
+  { length: Math.ceil(campusPartners.length / 6) },
+  (_, index) => campusPartners.slice(index * 6, index * 6 + 6)
+)
+
 
 function Scene() {
   const mountRef = useRef<HTMLDivElement>(null)
@@ -2104,7 +2129,7 @@ function App() {
                 </span>
 
                 <h2>
-                  {events.length} EVENTS.
+                  UNIQUE IDEAS.
                   <br />
                   <i>
                     LIMITLESS CREATIVITY.
@@ -2122,20 +2147,24 @@ function App() {
                 className="about-copy"
               >
                 <p>
-                  UNIQUE 2K26 is a college
-                  symposium bringing students
-                  together through technology,
-                  creativity, innovation, and
-                  entertainment.
+                  UNIQUE &amp; ZENTHRA 2K26 is a
+                  National Level Technical
+                  Symposium hosted by the
+                  Department of Computer Science
+                  and Engineering (CSE) and the
+                  Department of Information
+                  Technology (IT) at Dhanalakshmi
+                  Srinivasan Engineering College
+                  (Autonomous), Perambalur.
                 </p>
 
                 <p>
-                  Eight challenges, two
-                  categories, and one campus
-                  full of people ready to think
-                  differently. Bring your team,
-                  choose your one event, and
-                  make the experience your own.
+                  Two departments, multiple
+                  challenges, and one platform for
+                  technology, creativity, innovation,
+                  and entertainment. Bring your team,
+                  choose your events, and experience
+                  UNIQUE &amp; ZENTHRA 2K26.
                 </p>
 
                 <a
@@ -2144,7 +2173,7 @@ function App() {
                   rel="noreferrer"
                   className="text-link"
                 >
-                  Meet us on campus
+                  Join us at UNIQUE &amp; ZENTHRA 2K26
                   <ArrowRight size={16} />
                 </a>
               </motion.div>
@@ -2203,37 +2232,62 @@ function App() {
               </p>
             </motion.div>
 
-
             <div
-              className="marquee"
-              aria-label="Partners"
+              className="marquee campus-partner-heading"
+              aria-label="Campus Partner"
             >
               <div className="marquee-track">
+                <span>
+                  <Sparkles size={13} />
+                  CAMPUS PARTNER
+                </span>
+              </div>
+            </div>
 
-                {[
-                  'CAMPUS PARTNER',
-                  'KNOWLEDGE PARTNER',
-                  'COMMUNITY PARTNER',
-                  'CAMPUS PARTNER',
-                  'KNOWLEDGE PARTNER',
-                  'COMMUNITY PARTNER',
-                ].map(
-                  (
-                    sponsor,
-                    index
-                  ) => (
-                    <span
-                      key={`${sponsor}-${index}`}
+
+            <div
+              className="campus-partner-marquee"
+              aria-label="Campus Partners"
+            >
+              <div className="campus-partner-track">
+                {[...campusPartnerGroups, ...campusPartnerGroups].map(
+                  (group, groupIndex) => (
+                    <div
+                      className="campus-partner-group"
+                      key={`campus-partner-group-${groupIndex}`}
+                      aria-hidden={groupIndex >= campusPartnerGroups.length}
                     >
-                      <Sparkles
-                        size={13}
-                      />
-
-                      {sponsor}
-                    </span>
+                      {group.map((partner) => (
+                        <div
+                          className="campus-partner-card"
+                          key={`${groupIndex}-${partner.name}`}
+                        >
+                          <img
+                            src={partner.logo}
+                            alt={groupIndex < campusPartnerGroups.length ? partner.name : ''}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   )
                 )}
+              </div>
+            </div>
 
+            <div
+              className="marquee partner-types"
+              aria-label="Other partners"
+            >
+              <div className="marquee-track">
+                {[
+                  'KNOWLEDGE PARTNER',
+                  'COMMUNITY PARTNER',
+                ].map((sponsor) => (
+                  <span key={sponsor}>
+                    <Sparkles size={13} />
+                    {sponsor}
+                  </span>
+                ))}
               </div>
             </div>
 
